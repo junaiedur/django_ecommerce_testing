@@ -1,0 +1,49 @@
+{% load static %}
+
+<!-- Sticky Bottom Navigation Bar with Animation -->
+<div class="sticky top-[60px] z-40 bg-orange-50 h-12 bottomnav-animate">
+  <div class="max-w-[1320px] mx-auto h-full flex items-center justify-between">
+
+    <!-- Left: Categories -->
+    <div class="flex space-x-6 text-orange-600 text-xs font-semibold select-none">
+      <a href="#" class="hover:text-orange-800 transition">Electronics</a>
+      <a href="#" class="hover:text-orange-800 transition">Fashion</a>
+      <a href="#" class="hover:text-orange-800 transition">Home & Garden</a>
+      <a href="#" class="hover:text-orange-800 transition">Sports</a>
+      <a href="#" class="hover:text-orange-800 transition">Toys</a>
+      <a href="#" class="hover:text-orange-800 transition">Books</a>
+    </div>
+
+    <!-- Right: Best Deals & Flash Sale -->
+    <div class="flex space-x-6 items-center text-orange-600 text-xs font-semibold select-none">
+      <a href="#" class="flex items-center hover:text-orange-800 transition">
+        <img src="{% static 'images/bestdeals.png' %}" alt="Best Deals" class="h-4 w-4 mr-1" />
+        Best Deals
+      </a>
+
+      <a href="#" class="flex items-center hover:text-orange-800 transition">
+        <img src="{% static 'images/flashsale.png' %}" alt="Flash Sale" class="h-4 w-4 mr-1" />
+        Flash Sale
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<!-- Animation Styles -->
+<style>
+@keyframes slideUpFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bottomnav-animate {
+  animation: slideUpFadeIn 0.5s ease-out forwards;
+}
+</style>
