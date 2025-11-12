@@ -1,6 +1,8 @@
+{% extends 'base.html' %}
+{% block title %}Product Overview | Kinbo Shop{% endblock %}
 {% load static %}
-{% block product %}
 
+{% block content %}
 <!-- =========================
 🧩 MAIN PAGE WRAPPER
 Encapsulates the entire product detail layout
@@ -265,5 +267,9 @@ Encapsulates the entire product detail layout
   }
 </style>
 
-{% endblock %}
 {% include 'product_review.html' %}
+<br><br><br>
+<h2 class="text-2xl font-semibold mb-3 text-center">Similar Products</h2><hr class="mb-6">
+{% include 'card.html' %}
+
+{% endblock %}

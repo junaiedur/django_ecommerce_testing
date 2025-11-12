@@ -4,7 +4,7 @@ from django.contrib import messages
 # Create your views here.
 
 def home(request):
-    return render(request, 'wishlist.html')
+    return render(request, 'index.html')
 
 def search(request):
     query = request.GET.get('q')
@@ -28,4 +28,19 @@ def login_view(request):
         else:
             messages.error(request, "Invalid email or password")
 
-    return render(request, 'login.html')
+    return render(request, 'registration/login.html')
+
+def signup_view(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('confirm_password')
+
+        if password != confirm_password:
+            messages.error(request, "Passwords do not match")
+        else:
+            # ⚙️ You can integrate user creation logic here later
+            messages.success(request, "Signup successful! Please log in.")
+            return redirect('login')
+
+    return render(request, 'registration/signup.html')

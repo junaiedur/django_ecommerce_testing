@@ -28,7 +28,7 @@
 
         <!-- Image -->
         <div class="p-4">
-          <img src="{% static 'images/product1.png' %}" alt="Wireless Headphones"
+          <img src="{% static 'images/product1.jpg' %}" alt="Wireless Headphones"
                class="w-full sm:w-40 h-48 sm:h-40 object-cover rounded-lg">
         </div>
 
@@ -148,19 +148,19 @@
   <!-- Sticky bulk action bar (appears only when any items are selected) -->
   <div id="bulkBar" class="fixed left-0 right-0 bottom-4 z-40 pointer-events-none">
     <div class="max-w-[1320px] mx-auto px-4">
-      <div class="bulk-inner hidden pointer-events-auto bg-white shadow-lg border border-gray-200 rounded-xl p-3 flex items-center justify-between">
-        <p class="text-sm text-gray-700">
-          <span id="selectedCount" class="font-semibold text-gray-900">0</span> selected
-        </p>
-        <div class="flex items-center gap-2">
-          <button id="bulkAddToCart" class="bg-orange-600 text-white px-4 py-2 rounded-md font-medium hover:scale-105 transition">
-            🛒 Add Selected to Cart
-          </button>
-          <button id="bulkRemove" class="text-red-600 border border-red-200 px-4 py-2 rounded-md font-medium hover:bg-red-50 transition">
-            ❌ Remove Selected
-          </button>
+        <div class="bulk-inner hidden pointer-events-auto bg-white shadow-lg border border-gray-200 rounded-xl p-3 flex items-center justify-between">
+            <p class="text-sm text-gray-700"><span id="selectedCount" class="font-semibold text-gray-900">0</span> selected</p>
+            <div class="flex items-center gap-2">
+                <button id="bulkAddToCart" class="flex items-center gap-2 bg-orange-600 text-white px-4 py-2 rounded-md font-medium hover:scale-105 transition">
+                    <img src="{% static 'images/cart.png' %}" alt="Cart icon" class="w-4 h-4">
+                    <span>Add Selected to Cart</span>
+                </button>
+                <button id="bulkRemove" class="flex items-center gap-2 text-red-600 border border-red-200 px-4 py-2 rounded-md font-medium hover:bg-red-50 transition">
+                    <img src="{% static 'images/remove.png' %}" alt="Remove icon" class="w-4 h-4">
+                    <span>Remove Selected</span>
+                </button>
+            </div>
         </div>
-      </div>
     </div>
   </div>
 </section>
@@ -208,15 +208,21 @@
   }
 
   function refreshEmptyState() {
-    const items = $$('.wl-item');
-    if (items.length === 0) {
-      container.classList.add('hidden');
-      emptyState.classList.remove('hidden');
-    } else {
-      container.classList.remove('hidden');
-      emptyState.classList.add('hidden');
-    }
+  const items = $$('.wl-item');
+  const selectAllRow = selectAll.closest('div'); // parent div for the "Select All" row
+  if (items.length === 0) {
+    container.classList.add('hidden');
+    emptyState.classList.remove('hidden');
+    // hide select all when empty
+    if (selectAllRow) selectAllRow.classList.add('hidden');
+  } else {
+    container.classList.remove('hidden');
+    emptyState.classList.add('hidden');
+    // show select all when not empty
+    if (selectAllRow) selectAllRow.classList.remove('hidden');
   }
+}
+
 
   // ---- Setup per-item controls
   function bindItem(item) {
