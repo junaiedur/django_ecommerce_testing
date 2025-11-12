@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Address Details | Kinbo Shop{% endblock %}
+{% block nav %}{% endblock %}
+{% block category %}{% endblock %}
+
+{% block content %}
+<!-- Full-screen background with floating bubbles -->
+<div class="relative min-h-screen flex items-center justify-center bg-orange-50 overflow-hidden">
+
+  <!-- Floating Bubbles -->
+  <div class="absolute inset-0 z-0">
+    <div class="absolute w-32 h-32 bg-orange-200 rounded-full top-10 left-1/4 opacity-40 animate-bubble"></div>
+    <div class="absolute w-20 h-20 bg-orange-300 rounded-full top-1/3 right-20 opacity-30 animate-bubble-slow"></div>
+    <div class="absolute w-40 h-40 bg-orange-100 rounded-full bottom-20 left-1/3 opacity-20 animate-bubble-slower"></div>
+    <div class="absolute w-24 h-24 bg-orange-200 rounded-full bottom-10 right-1/4 opacity-25 animate-bubble"></div>
+  </div>
+
+  <!-- Address Form -->
+  <div class="bg-white rounded-xl shadow-xl max-w-lg w-full p-8 relative z-10 transform transition-all duration-700 animate-fade-in">
+    <h2 class="text-3xl font-bold text-orange-600 text-center mb-6">Address Details</h2>
+
+    <form id="addressForm" novalidate class="space-y-4">
+
+      <!-- District -->
+      <div>
+        <label for="district" class="block text-sm font-medium text-gray-700 mb-1">District</label>
+        <select id="district" required
+                class="w-full px-4 py-2 border border-gray-300 rounded focus:border-orange-500 focus:ring focus:ring-orange-200 outline-none text-gray-800">
+          <option value="">Select District</option>
+          <option>Dhaka</option>
+          <option>Chattogram</option>
+          <option>Khulna</option>
+          <option>Rajshahi</option>
+          <option>Barishal</option>
+          <option>Sylhet</option>
+          <option>Rangpur</option>
+          <option>Mymensingh</option>
+          <option>Gazipur</option>
+          <option>Narayanganj</option>
+        </select>
+        <p class="hidden text-red-600 text-sm mt-1">Please select your district</p>
+      </div>
+
+      <!-- City -->
+      <div>
+        <label for="city" class="block text-sm font-medium text-gray-700 mb-1">City / Thana</label>
+        <input type="text" id="city" required placeholder="Enter your city or thana"
+               class="w-full px-4 py-2 border border-gray-300 rounded focus:border-orange-500 focus:ring focus:ring-orange-200 outline-none text-gray-800">
+        <p class="hidden text-red-600 text-sm mt-1">City is required</p>
+      </div>
+
+      <!-- Area -->
+      <div>
+        <label for="area" class="block text-sm font-medium text-gray-700 mb-1">Area / Locality</label>
+        <input type="text" id="area" required placeholder="Enter your area or locality"
+               class="w-full px-4 py-2 border border-gray-300 rounded focus:border-orange-500 focus:ring focus:ring-orange-200 outline-none text-gray-800">
+        <p class="hidden text-red-600 text-sm mt-1">Area is required</p>
+      </div>
+
+      <!-- Street -->
+      <div>
+        <label for="street" class="block text-sm font-medium text-gray-700 mb-1">Street / House / Road No.</label>
+        <input type="text" id="street" required placeholder="e.g., House 32, Road 4, Sector 9"
+               class="w-full px-4 py-2 border border-gray-300 rounded focus:border-orange-500 focus:ring focus:ring-orange-200 outline-none text-gray-800">
+        <p class="hidden text-red-600 text-sm mt-1">Street address is required</p>
+      </div>
+
+      <!-- Postal Code -->
+      <div>
+        <label for="postal" class="block text-sm font-medium text-gray-700 mb-1">Postal Code</label>
+        <input type="number" id="postal" required placeholder="e.g., 1207"
+               class="w-full px-4 py-2 border border-gray-300 rounded focus:border-orange-500 focus:ring focus:ring-orange-200 outline-none text-gray-800">
+        <p class="hidden text-red-600 text-sm mt-1">Postal code is required</p>
+      </div>
+
+      <!-- Address Label -->
+      <div>
+        <label for="label" class="block text-sm font-medium text-gray-700 mb-1">Address Label</label>
+        <select id="label" required
+                class="w-full px-4 py-2 border border-gray-300 rounded focus:border-orange-500 focus:ring focus:ring-orange-200 outline-none text-gray-800">
+          <option value="">Choose Label</option>
+          <option>Home</option>
+          <option>Office</option>
+          <option>Other</option>
+        </select>
+        <p class="hidden text-red-600 text-sm mt-1">Please choose an address label</p>
+      </div>
+
+      <!-- Default Checkbox -->
+      <div class="flex items-center space-x-2">
+        <input type="checkbox" id="default" class="accent-orange-500 w-4 h-4">
+        <label for="default" class="text-sm text-gray-700">Save as default address</label>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit"
+              class="w-full bg-orange-600 text-white font-semibold py-2 rounded-lg transform transition duration-300 hover:scale-105 hover:bg-orange-700">
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- JS: Form Validation -->
+<script>
+  const form = document.getElementById('addressForm');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let valid = true;
+    form.querySelectorAll('input[required], select[required]').forEach((field) => {
+      const errorMsg = field.nextElementSibling;
+      if (!field.value.trim()) {
+        field.classList.add('border-red-500');
+        errorMsg.classList.remove('hidden');
+        valid = false;
+      } else {
+        field.classList.remove('border-red-500');
+        errorMsg.classList.add('hidden');
+      }
+    });
+    if (valid) alert("✅ Address submitted successfully!");
+  });
+</script>
+
+<!-- Animations -->
+<style>
+/* Bubble animations */
+@keyframes bubble {
+  0%,100% { transform: translateY(0) translateX(0); opacity: 0.7; }
+  50% { transform: translateY(-20px) translateX(10px); opacity: 0.5; }
+}
+@keyframes bubble-slow {
+  0%,100% { transform: translateY(0) translateX(0); opacity: 0.6; }
+  50% { transform: translateY(-15px) translateX(-10px); opacity: 0.4; }
+}
+@keyframes bubble-slower {
+  0%,100% { transform: translateY(0) translateX(0); opacity: 0.5; }
+  50% { transform: translateY(-10px) translateX(5px); opacity: 0.3; }
+}
+.animate-bubble { animation: bubble 6s ease-in-out infinite; }
+.animate-bubble-slow { animation: bubble-slow 8s ease-in-out infinite; }
+.animate-bubble-slower { animation: bubble-slower 10s ease-in-out infinite; }
+
+/* Fade-in form */
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in { animation: fadeIn 0.8s ease forwards; }
+</style>
+{% endblock %}
+{% block footer %}{% endblock %}
