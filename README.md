@@ -1,5 +1,9 @@
 # E Commerce Project
 
+### Front End File Location
+- Go To: `/main/templates/`
+
+
 ### Setup E Commerce Project
 
 1. Create/Activate Python's Virtual Environment.
