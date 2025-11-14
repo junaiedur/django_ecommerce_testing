@@ -4,7 +4,7 @@ from django.contrib import messages
 # Create your views here.
 
 def home(request):
-    return render(request, 'order.html')
+    return render(request, 'return.html')
 
 def search(request):
     query = request.GET.get('q')
