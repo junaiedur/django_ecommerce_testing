@@ -4,7 +4,7 @@ from django.contrib import messages
 # Create your views here.
 
 def home(request):
-    return render(request, 'flashsales.html')
+    return render(request, 'index.html')
 
 def search(request):
     query = request.GET.get('q')

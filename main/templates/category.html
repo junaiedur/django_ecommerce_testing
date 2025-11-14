@@ -1,10 +1,38 @@
 {% load static %}
 
-<!-- Sticky Category Navigation (Visible on Desktop Only) -->
+<!-- =====================================================
+     MOBILE/TABLET VERSION (lg:hidden)
+     Shows: Best Deals + Flash Sale as full-width buttons
+===================================================== -->
+<div class="lg:hidden w-full bg-orange-50 py-2">
+  <div class="max-w-[1320px] mx-auto px-4 grid grid-cols-2 gap-3">
+
+    <!-- Best Deals Button -->
+    <a href="#"
+       class="flex items-center justify-center bg-white text-orange-600 font-semibold text-sm py-3 rounded-lg shadow hover:bg-orange-100 transition">
+      <img src="{% static 'images/bestdeals.png' %}" class="h-4 w-4 mr-2" />
+      Best Deals
+    </a>
+
+    <!-- Flash Sale Button -->
+    <a href="#"
+       class="flex items-center justify-center bg-white text-orange-600 font-semibold text-sm py-3 rounded-lg shadow hover:bg-orange-100 transition">
+      <img src="{% static 'images/flashsale.png' %}" class="h-4 w-4 mr-2" />
+      Flash Sale
+    </a>
+
+  </div>
+</div>
+
+
+
+<!-- =====================================================
+     DESKTOP CATEGORY BAR (visible only on lg+)
+===================================================== -->
 <div class="sticky top-[60px] z-40 bg-orange-50 h-12 bottomnav-animate hidden lg:block">
   <div class="max-w-[1320px] mx-auto h-full flex items-center justify-between">
 
-    <!-- LEFT: Categories with Dropdowns -->
+    <!-- LEFT: Categories with Dropdowns (desktop only) -->
     <div class="flex space-x-6 text-orange-600 text-xs font-semibold select-none">
 
       <!-- ================= MEN ================= -->
@@ -138,8 +166,10 @@
 
     </div>
 
-    <!-- RIGHT: Best Deals & Flash Sale (unchanged) -->
+
+    <!-- RIGHT: Best Deals & Flash Sale (always visible) -->
     <div class="flex space-x-6 items-center text-orange-600 text-xs font-semibold select-none">
+
       <a href="#" class="flex items-center hover:text-orange-800 transition">
         <img src="{% static 'images/bestdeals.png' %}" class="h-4 w-4 mr-1" />
         Best Deals
@@ -149,18 +179,19 @@
         <img src="{% static 'images/flashsale.png' %}" class="h-4 w-4 mr-1" />
         Flash Sale
       </a>
+
     </div>
 
   </div>
 </div>
 
-<!-- Animation Styles (unchanged) -->
+
+
 <style>
 @keyframes slideUpFadeIn {
   0% { opacity: 0; transform: translateY(20px); }
   100% { opacity: 1; transform: translateY(0); }
 }
-
 .bottomnav-animate {
   animation: slideUpFadeIn 0.5s ease-out forwards;
 }
