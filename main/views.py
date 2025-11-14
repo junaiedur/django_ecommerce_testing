@@ -4,7 +4,7 @@ from django.contrib import messages
 # Create your views here.
 
 def home(request):
-    return render(request, 'product_overview.html')
+    return render(request, 'discount_product_overview.html')
 
 def search(request):
     query = request.GET.get('q')
